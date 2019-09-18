@@ -1,2 +1,17 @@
-*.class
-*.log
+# Mac OS X files
+.DS_Store
+
+# IntelliJ
+.idea
+
+# Artifacts
+target/
+
+# Data
+data/example-bucket/*
+!data/example-bucket/noaa/
+!data/example-bucket/.gitkeep
+
+# Minio
+*/.minio.sys
+
