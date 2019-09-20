@@ -10,7 +10,7 @@ import org.apache.spark.sql.SparkSession
   * @author christopher
   * @since 2019-09-17
   */
-object Main extends App with LazyLogging {
+object ConsumerMain extends App with LazyLogging {
 
   override def main(args: Array[String]): Unit = {
     val startInstant = Instant.now()

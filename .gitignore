@@ -10,6 +10,7 @@ target/
 # Data
 data/example-bucket/*
 !data/example-bucket/noaa/
+!data/example-bucket/sightings/.gitkeep
 !data/example-bucket/.gitkeep
 
 # Minio

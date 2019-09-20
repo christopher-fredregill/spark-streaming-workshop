@@ -8,7 +8,7 @@
         </encoder>
     </appender>
 
-    <logger name="com.example.spark.ConsumerMain" level="INFO" />
+    <logger name="com.example.emitter.ProducerMain" level="INFO" />
 
     <root level="ERROR">
         <appender-ref ref="STDOUT" />

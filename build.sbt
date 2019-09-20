@@ -23,9 +23,10 @@ lazy val common = project
 lazy val consumer = project
   .settings(
     name := "consumer",
-    mainClass in (Compile, run) := Some("com.example.spark.Main"),
+    mainClass in (Compile, run) := Some("com.example.spark.ConsumerMain"),
     assemblySettings,
-    libraryDependencies ++= commonDependencies
+    libraryDependencies ++= commonDependencies ++ sparkDependencies,
+    libraryDependencies += Dependencies.awsS3 % Compile
   )
   .dependsOn(
     common
@@ -34,21 +35,31 @@ lazy val consumer = project
 lazy val producer = project
   .settings(
     name := "producer",
+    mainClass in (Compile, run) := Some("com.example.emitter.ProducerMain"),
     assemblySettings,
-    libraryDependencies ++= commonDependencies
+    libraryDependencies ++= commonDependencies,
+    libraryDependencies += Dependencies.awsS3 % Compile,
+    libraryDependencies += Dependencies.akkaActor % Compile,
+    libraryDependencies ++= Seq(
+      Dependencies.circeCore,
+      Dependencies.circeGeneric,
+      Dependencies.circeParser
+    ).map(_ % Compile)
   )
   .dependsOn(
     common
   )
 
+lazy val sparkDependencies = Seq(
+  Dependencies.hadoopAws % Compile,
+  Dependencies.spark % Compile,
+  Dependencies.sparkSql % Compile
+)
+
 lazy val commonDependencies = Seq(
   Dependencies.logback,
   Dependencies.scalaLogging,
   Dependencies.slf4j,
-  Dependencies.awsS3 % Compile,
-  Dependencies.hadoopAws % Compile,
-  Dependencies.spark % Compile,
-  Dependencies.sparkSql % Compile,
   Dependencies.scalaTest % Test
 )
 
