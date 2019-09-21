@@ -1,7 +1,10 @@
 package com.example.models
 
+import scala.util.Random
+
 /**
   * Types of whales which can be sighted in the wild.
+  *
   * @author christopher
   * @since 2019-09-19
   */
@@ -14,6 +17,8 @@ sealed trait WhaleType {
   val teeth: Boolean
   val nostrils: Int
   val dorsalFin: Boolean
+
+  def simulateRegion(random: Random): BioRegion
 }
 
 sealed trait BaleenWhale extends WhaleType {
@@ -36,6 +41,15 @@ case object GrayWhale extends BaleenWhale {
   override val size: WhaleSize = Medium
   override val dorsalFin: Boolean = false
   override val spots: Boolean = true
+
+  override def simulateRegion(random: Random): BioRegion = {
+    random.nextDouble() match {
+      case u: Double if u < 0.45 => MexicoPacific
+      case u: Double if u < 0.85 => NorthPacificCoast
+      case u: Double if u < 0.95 => ArcticOcean
+      case _                     => NorthPacificOcean
+    }
+  }
 }
 
 case object BlueWhale extends BaleenWhale {
@@ -43,6 +57,20 @@ case object BlueWhale extends BaleenWhale {
   override val colors: Seq[WhaleColor] = Seq(Blue)
   override val size: WhaleSize = Large
   override val dorsalFin: Boolean = true
+
+  override def simulateRegion(random: Random): BioRegion = {
+    random.nextDouble() match {
+      case u: Double if u < 0.1 => NorthPacificCoast
+      case u: Double if u < 0.2 => NorthPacificOcean
+      case u: Double if u < 0.3 => MexicoPacific
+      case u: Double if u < 0.5 => Hawaii
+      case u: Double if u < 0.6 => Caribbean
+      case u: Double if u < 0.7 => NorthAtlanticCoast
+      case u: Double if u < 0.8 => NorthAtlanticOcean
+      case u: Double if u < 0.9 => SouthAtlanticCoast
+      case _                    => SouthAtlanticOcean
+    }
+  }
 }
 
 case object HumpbackWhale extends BaleenWhale {
@@ -50,6 +78,18 @@ case object HumpbackWhale extends BaleenWhale {
   override val colors: Seq[WhaleColor] = Seq(Black)
   override val size: WhaleSize = Large
   override val dorsalFin: Boolean = true
+
+  override def simulateRegion(random: Random): BioRegion = {
+    random.nextDouble() match {
+      case u: Double if u < 0.2 => NorthPacificCoast
+      case u: Double if u < 0.4 => MexicoPacific
+      case u: Double if u < 0.5 => Hawaii
+      case u: Double if u < 0.6 => Caribbean
+      case u: Double if u < 0.7 => SouthAtlanticCoast
+      case u: Double if u < 0.8 => NorthAtlanticCoast
+      case _                    => ArcticOcean
+    }
+  }
 }
 
 case object FinWhale extends BaleenWhale {
@@ -57,6 +97,19 @@ case object FinWhale extends BaleenWhale {
   override val colors: Seq[WhaleColor] = Seq(Brown, LightGray, White)
   override val size: WhaleSize = Large
   override val dorsalFin: Boolean = true
+
+  override def simulateRegion(random: Random): BioRegion = {
+    random.nextDouble() match {
+      case u: Double if u < 0.1  => NorthPacificCoast
+      case u: Double if u < 0.25 => NorthPacificOcean
+      case u: Double if u < 0.33 => Hawaii
+      case u: Double if u < 0.45 => SouthAtlanticCoast
+      case u: Double if u < 0.5  => SouthAtlanticOcean
+      case u: Double if u < 0.6  => NorthAtlanticCoast
+      case u: Double if u < 0.7  => NorthAtlanticCoast
+      case _                     => ArcticOcean
+    }
+  }
 }
 
 case object SeiWhale extends BaleenWhale {
@@ -64,6 +117,20 @@ case object SeiWhale extends BaleenWhale {
   override val colors: Seq[WhaleColor] = Seq(DarkGray, LightGray, White)
   override val size: WhaleSize = Large
   override val dorsalFin: Boolean = true
+
+  override def simulateRegion(random: Random): BioRegion = {
+    random.nextDouble() match {
+      case u: Double if u < 0.11 => NorthPacificCoast
+      case u: Double if u < 0.22 => NorthPacificOcean
+      case u: Double if u < 0.33 => SouthPacificCoast
+      case u: Double if u < 0.44 => SouthPacificOcean
+      case u: Double if u < 0.55 => NorthAtlanticCoast
+      case u: Double if u < 0.66 => NorthAtlanticOcean
+      case u: Double if u < 0.77 => SouthAtlanticOcean
+      case u: Double if u < 0.88 => SouthAtlanticCoast
+      case u: _                  => Hawaii
+    }
+  }
 }
 
 case object BrydesWhale extends BaleenWhale {
@@ -71,6 +138,17 @@ case object BrydesWhale extends BaleenWhale {
   override val colors: Seq[WhaleColor] = Seq(DarkGray, White)
   override val size: WhaleSize = Medium
   override val dorsalFin: Boolean = true
+
+  override def simulateRegion(random: Random): BioRegion = {
+    random.nextDouble() match {
+      case u: Double if u < 0.25 => MexicoPacific
+      case u: Double if u < 0.5  => SouthPacificOcean
+      case u: Double if u < 0.6  => SouthPacificCoast
+      case u: Double if u < 0.75 => SouthAtlanticOcean
+      case u: Double if u < 0.85 => SouthAtlanticCoast
+      case _                     => Caribbean
+    }
+  }
 }
 
 case object MinkeWhale extends BaleenWhale {
@@ -78,6 +156,21 @@ case object MinkeWhale extends BaleenWhale {
   override val colors: Seq[WhaleColor] = Seq(Black, DarkGray)
   override val size: WhaleSize = Small
   override val dorsalFin: Boolean = true
+
+  override def simulateRegion(random: Random): BioRegion = {
+    random.nextDouble() match {
+      case u: Double if u < 0.13 => NorthPacificCoast
+      case u: Double if u < 0.25 => NorthPacificOcean
+      case u: Double if u < 0.36 => SouthPacificCoast
+      case u: Double if u < 0.48 => SouthPacificOcean
+      case u: Double if u < 0.66 => NorthAtlanticCoast
+      case u: Double if u < 0.77 => NorthAtlanticOcean
+      case u: Double if u < 0.82 => SouthAtlanticCoast
+      case u: Double if u < 0.85 => SouthAtlanticOcean
+      case u: Double if u < 0.93 => Caribbean
+      case _                     => GulfOfMexico
+    }
+  }
 }
 
 case object RightWhale extends BaleenWhale {
@@ -85,6 +178,20 @@ case object RightWhale extends BaleenWhale {
   override val colors: Seq[WhaleColor] = Seq(Black, DarkGray)
   override val size: WhaleSize = Large
   override val dorsalFin: Boolean = false
+  override val spots: Boolean = true
+
+  override def simulateRegion(random: Random): BioRegion = {
+    random.nextDouble() match {
+      case u: Double if u < 0.2  => NorthAtlanticOcean
+      case u: Double if u < 0.25 => NorthAtlanticCoast
+      case u: Double if u < 0.4  => SouthAtlanticOcean
+      case u: Double if u < 0.45 => SouthAtlanticCoast
+      case u: Double if u < 0.6  => SouthPacificOcean
+      case u: Double if u < 0.65 => SouthPacificCoast
+      case u: Double if u < 0.8  => NorthPacificOcean
+      case _                     => NorthPacificCoast
+    }
+  }
 }
 
 case object SpermWhale extends ToothedWhale {
@@ -92,6 +199,22 @@ case object SpermWhale extends ToothedWhale {
   override val colors: Seq[WhaleColor] = Seq(DarkGray)
   override val size: WhaleSize = Large
   override val dorsalFin: Boolean = true
+
+  override def simulateRegion(random: Random): BioRegion = {
+    random.nextDouble() match {
+      case u: Double if u < 0.1  => Hawaii
+      case u: Double if u < 0.25 => GulfOfMexico
+      case u: Double if u < 0.35 => Caribbean
+      case u: Double if u < 0.4  => NorthAtlanticOcean
+      case u: Double if u < 0.55 => NorthAtlanticCoast
+      case u: Double if u < 0.6  => SouthAtlanticOcean
+      case u: Double if u < 0.75 => SouthAtlanticCoast
+      case u: Double if u < 0.8  => SouthPacificOcean
+      case u: Double if u < 0.85 => SouthPacificCoast
+      case u: Double if u < 0.9  => NorthPacificOcean
+      case _                     => NorthPacificCoast
+    }
+  }
 }
 
 case object Narwhal extends ToothedWhale {
@@ -100,6 +223,14 @@ case object Narwhal extends ToothedWhale {
   override val size: WhaleSize = Medium
   override val tusk: Boolean = true
   override val dorsalFin: Boolean = false
+
+  override def simulateRegion(random: Random): BioRegion = {
+    random.nextDouble() match {
+      case u: Double if u < 0.33 => NorthAtlanticOcean
+      case u: Double if u < 0.66 => NorthAtlanticCoast
+      case _                     => ArcticOcean
+    }
+  }
 }
 
 case object Orca extends OceanicDolphin {
@@ -107,12 +238,42 @@ case object Orca extends OceanicDolphin {
   override val colors: Seq[WhaleColor] = Seq(Black, White)
   override val size: WhaleSize = Medium
   override val dorsalFin: Boolean = true
+
+  override def simulateRegion(random: Random): BioRegion = {
+    random.nextDouble() match {
+      case u: Double if u < 0.1  => Hawaii
+      case u: Double if u < 0.25 => GulfOfMexico
+      case u: Double if u < 0.35 => Caribbean
+      case u: Double if u < 0.4  => NorthAtlanticOcean
+      case u: Double if u < 0.55 => NorthAtlanticCoast
+      case u: Double if u < 0.6  => SouthAtlanticOcean
+      case u: Double if u < 0.75 => SouthAtlanticCoast
+      case u: Double if u < 0.8  => SouthPacificOcean
+      case u: Double if u < 0.85 => SouthPacificCoast
+      case u: Double if u < 0.9  => NorthPacificOcean
+      case u: Double if u < 0.95 => NorthPacificCoast
+      case _                     => ArcticOcean
+    }
+  }
 }
 
 case object FalseKillerWhale extends OceanicDolphin {
   override val name: String = "False Killer Whale"
   override val colors: Seq[WhaleColor] = Seq(Black, DarkGray)
   override val size: WhaleSize = Medium
+
+  override def simulateRegion(random: Random): BioRegion = {
+    random.nextDouble() match {
+      case u: Double if u < 0.2 => SouthAtlanticCoast
+      case u: Double if u < 0.3 => SouthPacificOcean
+      case u: Double if u < 0.4 => SouthPacificCoast
+      case u: Double if u < 0.5 => NorthPacificOcean
+      case u: Double if u < 0.6 => NorthPacificCoast
+      case u: Double if u < 0.7 => GulfOfMexico
+      case u: Double if u < 0.8 => Caribbean
+      case _                    => NorthAtlanticOcean
+    }
+  }
 }
 
 case object Beluga extends ToothedWhale {
@@ -120,18 +281,58 @@ case object Beluga extends ToothedWhale {
   override val colors: Seq[WhaleColor] = Seq(White)
   override val size: WhaleSize = Medium
   override val dorsalFin: Boolean = false
+
+  override def simulateRegion(random: Random): BioRegion = {
+    random.nextDouble() match {
+      case u: Double if u < 0.01 => NorthAtlanticCoast
+      case u: Double if u < 0.03 => NorthAtlanticOcean
+      case u: Double if u < 0.06 => NorthPacificOcean
+      case u: Double if u < 0.07 => NorthPacificCoast
+      case _                     => ArcticOcean
+    }
+  }
 }
 
 case object BottlenoseDolphin extends OceanicDolphin {
   override val name: String = "Bottlenose Dolphin"
   override val colors: Seq[WhaleColor] = Seq(LightGray)
   override val size: WhaleSize = Small
+
+  override def simulateRegion(random: Random): BioRegion = {
+    random.nextDouble() match {
+      case u: Double if u < 0.1  => NorthPacificOcean
+      case u: Double if u < 0.2  => NorthPacificCoast
+      case u: Double if u < 0.25 => MexicoPacific
+      case u: Double if u < 0.3  => SouthPacificOcean
+      case u: Double if u < 0.4  => SouthPacificCoast
+      case u: Double if u < 0.5  => SouthAtlanticOcean
+      case u: Double if u < 0.6  => SouthAtlanticCoast
+      case u: Double if u < 0.65 => NorthAtlanticOcean
+      case u: Double if u < 0.7  => NorthAtlanticCoast
+      case u: Double if u < 0.8  => GulfOfMexico
+      case u: Double if u < 0.9  => Hawaii
+      case _                     => Caribbean
+    }
+  }
 }
 
 case object CommonDolphin extends OceanicDolphin {
   override val name: String = "Common Dolphin"
   override val colors: Seq[WhaleColor] = Seq(DarkGray, White)
   override val size: WhaleSize = Small
+
+  override def simulateRegion(random: Random): BioRegion = {
+    random.nextDouble() match {
+      case u: Double if u < 0.15 => NorthPacificCoast
+      case u: Double if u < 0.25 => MexicoPacific
+      case u: Double if u < 0.35 => SouthPacificCoast
+      case u: Double if u < 0.45 => SouthAtlanticCoast
+      case u: Double if u < 0.65 => NorthAtlanticCoast
+      case u: Double if u < 0.75 => GulfOfMexico
+      case u: Double if u < 0.85 => Hawaii
+      case _                     => Caribbean
+    }
+  }
 }
 
 case object SpottedDolphin extends OceanicDolphin {
@@ -139,10 +340,29 @@ case object SpottedDolphin extends OceanicDolphin {
   override val colors: Seq[WhaleColor] = Seq(White, LightGray)
   override val size: WhaleSize = Small
   override val spots: Boolean = true
+
+  override def simulateRegion(random: Random): BioRegion = {
+    random.nextDouble() match {
+      case u: Double if u < 0.15 => NorthAtlanticCoast
+      case u: Double if u < 0.3  => NorthAtlanticOcean
+      case u: Double if u < 0.5  => GulfOfMexico
+      case u: Double if u < 0.6  => SouthAtlanticCoast
+      case u: Double if u < 0.75 => SouthAtlanticOcean
+      case _                     => Caribbean
+    }
+  }
 }
 
 case object DuskyDolphin extends OceanicDolphin {
   override val name: String = "Dusky Dolphin"
   override val colors: Seq[WhaleColor] = Seq(DarkGray, White)
   override val size: WhaleSize = Small
+
+  override def simulateRegion(random: Random): BioRegion = {
+    random.nextDouble() match {
+      case u: Double if u < 0.05 => SouthAtlanticCoast
+      case u: Double if u < 0.95 => SouthPacificCoast
+      case _                     => SouthPacificOcean
+    }
+  }
 }

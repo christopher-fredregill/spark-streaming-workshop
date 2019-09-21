@@ -42,8 +42,8 @@ object ProducerMain extends App with LazyLogging {
     // TODO: this should encode any whale type correctly
     import io.circe.{Encoder, Json}
     implicit val sightingEncoder: Encoder[WhaleSighting] = (a: WhaleSighting) => Json.obj(
-      ("foo", Json.fromString(a.whaleType.get.name)),
-      ("bar", Json.fromInt(a.depth.get))
+      ("whale_type",  Json.fromString(a.whaleType.get.name)),
+      ("depth",       Json.fromInt(a.depth.get))
     )
 
     private def emitSighting(whaleType: WhaleType): Unit = {
