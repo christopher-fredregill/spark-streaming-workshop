@@ -35,6 +35,7 @@ sealed trait OceanicDolphin extends ToothedWhale {
   override val dorsalFin: Boolean = true
 }
 
+// 26,000
 case object GrayWhale extends BaleenWhale {
   override val name: String = "Gray Whale"
   override val colors: Seq[WhaleColor] = Seq(DarkGray)
@@ -52,6 +53,7 @@ case object GrayWhale extends BaleenWhale {
   }
 }
 
+// 25,000
 case object BlueWhale extends BaleenWhale {
   override val name: String = "Blue Whale"
   override val colors: Seq[WhaleColor] = Seq(Blue)
@@ -73,6 +75,7 @@ case object BlueWhale extends BaleenWhale {
   }
 }
 
+// 80,000
 case object HumpbackWhale extends BaleenWhale {
   override val name: String = "Humpback Whale"
   override val colors: Seq[WhaleColor] = Seq(Black)
@@ -92,6 +95,7 @@ case object HumpbackWhale extends BaleenWhale {
   }
 }
 
+// 46,000
 case object FinWhale extends BaleenWhale {
   override val name: String = "Fin Whale"
   override val colors: Seq[WhaleColor] = Seq(Brown, LightGray, White)
@@ -112,6 +116,7 @@ case object FinWhale extends BaleenWhale {
   }
 }
 
+// 80,000
 case object SeiWhale extends BaleenWhale {
   override val name: String = "Sei Whale"
   override val colors: Seq[WhaleColor] = Seq(DarkGray, LightGray, White)
@@ -128,11 +133,12 @@ case object SeiWhale extends BaleenWhale {
       case u: Double if u < 0.66 => NorthAtlanticOcean
       case u: Double if u < 0.77 => SouthAtlanticOcean
       case u: Double if u < 0.88 => SouthAtlanticCoast
-      case u: _                  => Hawaii
+      case _                     => Hawaii
     }
   }
 }
 
+// 100,000
 case object BrydesWhale extends BaleenWhale {
   override val name: String = "Bryde's Whale"
   override val colors: Seq[WhaleColor] = Seq(DarkGray, White)
@@ -151,6 +157,7 @@ case object BrydesWhale extends BaleenWhale {
   }
 }
 
+// 515,000
 case object MinkeWhale extends BaleenWhale {
   override val name: String = "Minke Whale"
   override val colors: Seq[WhaleColor] = Seq(Black, DarkGray)
@@ -173,6 +180,7 @@ case object MinkeWhale extends BaleenWhale {
   }
 }
 
+// 15,000
 case object RightWhale extends BaleenWhale {
   override val name: String = "Right Whale"
   override val colors: Seq[WhaleColor] = Seq(Black, DarkGray)
@@ -194,6 +202,7 @@ case object RightWhale extends BaleenWhale {
   }
 }
 
+// 360,000
 case object SpermWhale extends ToothedWhale {
   override val name: String = "Sperm Whale"
   override val colors: Seq[WhaleColor] = Seq(DarkGray)
@@ -217,6 +226,7 @@ case object SpermWhale extends ToothedWhale {
   }
 }
 
+// 170,000
 case object Narwhal extends ToothedWhale {
   override val name: String = "Narwhal"
   override val colors: Seq[WhaleColor] = Seq(White)
@@ -233,6 +243,7 @@ case object Narwhal extends ToothedWhale {
   }
 }
 
+// 50,000
 case object Orca extends OceanicDolphin {
   override val name: String = "Orca"
   override val colors: Seq[WhaleColor] = Seq(Black, White)
@@ -257,6 +268,7 @@ case object Orca extends OceanicDolphin {
   }
 }
 
+// 26,000
 case object FalseKillerWhale extends OceanicDolphin {
   override val name: String = "False Killer Whale"
   override val colors: Seq[WhaleColor] = Seq(Black, DarkGray)
@@ -276,6 +288,7 @@ case object FalseKillerWhale extends OceanicDolphin {
   }
 }
 
+// 150,000
 case object Beluga extends ToothedWhale {
   override val name: String = "Beluga Whale"
   override val colors: Seq[WhaleColor] = Seq(White)
@@ -293,6 +306,7 @@ case object Beluga extends ToothedWhale {
   }
 }
 
+// 600,000
 case object BottlenoseDolphin extends OceanicDolphin {
   override val name: String = "Bottlenose Dolphin"
   override val colors: Seq[WhaleColor] = Seq(LightGray)
@@ -316,6 +330,7 @@ case object BottlenoseDolphin extends OceanicDolphin {
   }
 }
 
+// 1,000,000
 case object CommonDolphin extends OceanicDolphin {
   override val name: String = "Common Dolphin"
   override val colors: Seq[WhaleColor] = Seq(DarkGray, White)
@@ -335,6 +350,7 @@ case object CommonDolphin extends OceanicDolphin {
   }
 }
 
+// 81,000
 case object SpottedDolphin extends OceanicDolphin {
   override val name: String = "Spotted Dolphin"
   override val colors: Seq[WhaleColor] = Seq(White, LightGray)
@@ -353,6 +369,7 @@ case object SpottedDolphin extends OceanicDolphin {
   }
 }
 
+// 70,000
 case object DuskyDolphin extends OceanicDolphin {
   override val name: String = "Dusky Dolphin"
   override val colors: Seq[WhaleColor] = Seq(DarkGray, White)

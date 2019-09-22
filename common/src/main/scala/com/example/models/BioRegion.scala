@@ -17,7 +17,10 @@ sealed trait BioRegion {
   val radius: Double
 
   /** Simulate a location within the region. */
-  def simulateLocation(random: Random): (Double, Double) = random.shuffle(locations).head
+  def simulateLocation(random: Random): (Double, Double) = {
+    val (initialLat, initialLon) = random.shuffle(locations).head
+    (initialLat + random.nextGaussian() * radius, initialLon + random.nextGaussian() * radius)
+  }
 }
 
 sealed trait CoastalBioRegion extends BioRegion {
@@ -25,7 +28,7 @@ sealed trait CoastalBioRegion extends BioRegion {
 }
 
 sealed trait OpenOceanBioRegion extends BioRegion {
-  override val radius: Double = 100.0
+  override val radius: Double = 2
 }
 
 case object NorthPacificCoast extends CoastalBioRegion {

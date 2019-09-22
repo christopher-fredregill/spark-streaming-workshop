@@ -16,6 +16,7 @@ case class WhaleSighting(
                           nostrils:    Option[Int]        = None,
                           spots:       Option[Boolean]    = None,
                           teeth:       Option[Boolean]    = None,
+                          dorsalFin:   Option[Boolean]    = None,
                           depth:       Option[Int]        = Some(0),
                           whaleType:   Option[WhaleType]  = None
                          )

@@ -14,6 +14,7 @@ lazy val global = project
   )
 
 lazy val common = project
+  .disablePlugins(sbtassembly.AssemblyPlugin)
   .settings(
     name := "common",
     libraryDependencies ++= Seq(Dependencies.scalaHttpJ)
@@ -68,8 +69,6 @@ lazy val assemblySettings = Seq(
   assemblyMergeStrategy in assembly := {
     case PathList("META-INF", xs @ _*) => MergeStrategy.discard
     case "application.conf"            => MergeStrategy.concat
-    case x =>
-      val oldStrategy = (assemblyMergeStrategy in assembly).value
-      oldStrategy(x)
+    case _                             => MergeStrategy.first
   }
 )

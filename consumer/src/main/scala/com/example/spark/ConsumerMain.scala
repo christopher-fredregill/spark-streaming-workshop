@@ -4,6 +4,8 @@ import java.time.Instant
 
 import com.typesafe.scalalogging.LazyLogging
 import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.types.{DataTypes, StructField, StructType}
+import org.apache.spark.sql.functions._
 
 /**
   * The main entrypoint to our structured streaming application.
@@ -27,7 +29,28 @@ object ConsumerMain extends App with LazyLogging {
       .master("local[2]")
       .getOrCreate()
 
-    val noaaSensors = spark.read.json("s3a://example-bucket/noaa/sensors/")
-    logger.info(s"There are ${noaaSensors.count()} NOAA sensors.")
+    val sightingsSchema = StructType(
+      Seq(
+        StructField("timestamp",  DataTypes.TimestampType, nullable = false),
+        StructField("latitude",   DataTypes.DoubleType, nullable = false),
+        StructField("longitude",  DataTypes.DoubleType, nullable = false)
+      )
+    )
+    val sightingsDF = spark.readStream.schema(sightingsSchema).json("s3a://example-bucket/sightings/")
+    import spark.implicits._
+    sightingsDF
+      .withWatermark("timestamp", "1 second")
+      .groupBy(
+        round('latitude, 0),
+        round('longitude, 0),
+        window('timestamp, "10 seconds", "5 second")
+      )
+      .count()
+      .orderBy('count desc)
+      .writeStream
+      .format("console")
+      .outputMode("complete")
+      .start()
+      .awaitTermination()
   }
 }

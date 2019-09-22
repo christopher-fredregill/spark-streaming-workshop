@@ -1,0 +1,9 @@
+data/
+scalastyle-config.xml
+README.md
+minio.env
+.gitignore
+target/
+.idea
+.dockerignore
+Dockerfile

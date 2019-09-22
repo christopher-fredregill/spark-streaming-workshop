@@ -5,7 +5,18 @@ package com.example.models
   * @author christopher
   * @since 2019-09-19
   */
-sealed trait WhaleSize
-case object Small   extends WhaleSize
-case object Medium  extends WhaleSize
-case object Large   extends WhaleSize
+sealed trait WhaleSize {
+  val label: String
+}
+
+case object Small   extends WhaleSize {
+  override val label: String = "Small"
+}
+
+case object Medium  extends WhaleSize {
+  override val label: String = "Medium"
+}
+
+case object Large   extends WhaleSize {
+  override val label: String = "Large"
+}
