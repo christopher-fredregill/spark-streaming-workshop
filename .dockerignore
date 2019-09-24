@@ -1,7 +1,7 @@
 data/
 scalastyle-config.xml
 README.md
-minio.env
+.env
 .gitignore
 target/
 .idea

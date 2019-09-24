@@ -35,7 +35,6 @@ sealed trait OceanicDolphin extends ToothedWhale {
   override val dorsalFin: Boolean = true
 }
 
-// 26,000
 case object GrayWhale extends BaleenWhale {
   override val name: String = "Gray Whale"
   override val colors: Seq[WhaleColor] = Seq(DarkGray)

@@ -53,7 +53,7 @@ lazy val producer = project
 
 lazy val sparkDependencies = Seq(
   Dependencies.hadoopAws % Compile,
-  Dependencies.spark % Compile,
+  Dependencies.sparkStreaming % Compile,
   Dependencies.sparkSql % Compile
 )
 
