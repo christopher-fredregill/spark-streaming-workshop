@@ -25,6 +25,6 @@ object Dependencies {
   lazy val scalaHttpJ     = "org.scalaj"                  %%  "scalaj-http"       % scalaHttpJV
   lazy val scalaTest      = "org.scalatest"               %%  "scalatest"         % scalaTestV
   lazy val slf4j          = "org.slf4j"                   %   "jcl-over-slf4j"    % slf4jV
-  lazy val spark          = "org.apache.spark"            %%  "spark-streaming"   % sparkV
+  lazy val sparkStreaming = "org.apache.spark"            %%  "spark-streaming"   % sparkV
   lazy val sparkSql       = "org.apache.spark"            %%  "spark-sql"         % sparkV
 }

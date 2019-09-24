@@ -89,8 +89,14 @@ object ProducerMain extends App with LazyLogging with S3Client {
 
     val region = whaleType.simulateRegion(random)
     val (latitude, longitude) = region.simulateLocation(random)
+    val whaleTypeReported = sys.env.get("REPORT_CLASSIFICATION") match {
+      case Some(_: String) => Some(whaleType)
+      case _               => None
+    }
+
+    val timestampMillisDelayed = sys.env.getOrElse("TIMESTAMP_MILLIS_DELAYED", 0L).asInstanceOf[Long]
     emitSighting(WhaleSighting(
-      timestamp = Timestamp.from(Instant.now()),
+      timestamp = Timestamp.from(Instant.now().minusMillis(timestampMillisDelayed)),
       latitude  = latitude,
       longitude = longitude,
       size      = Some(whaleType.size),
@@ -98,7 +104,8 @@ object ProducerMain extends App with LazyLogging with S3Client {
       nostrils  = nostrilsReported,
       spots     = spotsReported,
       teeth     = teethReported,
-      dorsalFin = dorsalFinReported
+      dorsalFin = dorsalFinReported,
+      whaleType = whaleTypeReported
     ))
   }
 
@@ -113,16 +120,17 @@ object ProducerMain extends App with LazyLogging with S3Client {
 
     implicit val whaleSightingEncoder: Encoder[WhaleSighting] = (sighting: WhaleSighting) => {
       Json.obj(
-        "timestamp"  -> sighting.timestamp.asJson,
-        "latitude"   -> sighting.latitude.asJson,
-        "longitude"  -> sighting.longitude.asJson,
-        "colors"     -> Json.arr(sighting.colors.map(_.label).map(Json.fromString):_*),
-        "size"       -> Json.fromString(sighting.size.map(_.label).getOrElse("Unknown")),
-        "nostrils"   -> sighting.nostrils.asJson,
-        "spots"      -> sighting.spots.asJson,
-        "teeth"      -> sighting.teeth.asJson,
-        "dorsal_fin" -> sighting.dorsalFin.asJson,
-        "depth"      -> sighting.depth.asJson
+        "timestamp" -> sighting.timestamp.asJson,
+        "latitude"  -> sighting.latitude.asJson,
+        "longitude" -> sighting.longitude.asJson,
+        "colors"    -> Json.arr(sighting.colors.map(_.label).map(Json.fromString):_*),
+        "size"      -> Json.fromString(sighting.size.map(_.label).getOrElse("Unknown")),
+        "nostrils"  -> sighting.nostrils.asJson,
+        "spots"     -> sighting.spots.asJson,
+        "teeth"     -> sighting.teeth.asJson,
+        "dorsalFin" -> sighting.dorsalFin.asJson,
+        "depth"     -> sighting.depth.asJson,
+        "whaleType" -> sighting.whaleType.map(_.name).asJson
       )
     }
     logger.debug(s"Placing whale sighting: $sighting")
